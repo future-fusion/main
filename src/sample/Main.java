@@ -29,33 +29,44 @@ public class Main extends Application {
         Scene scene = new Scene(pane, 320, 240);
 
         //ボタンの設定
-        Button b = new Button("音源再生");
-        b.addEventHandler( MouseEvent.MOUSE_CLICKED ,  e -> buttonCliked( e ) );
+        Button playButton = new Button("音源再生");
+        playButton.addEventHandler( MouseEvent.MOUSE_CLICKED ,  e -> buttonClikedA( e ) );
+        Button pauseButton = new Button("一時停止");
+        pauseButton.addEventHandler( MouseEvent.MOUSE_CLICKED ,  f -> buttonClikedB( f ) );
+        //ラベルの設定
         l = new Label("");
         //スライダーの初期化
         slider = new Slider();
 
-        pane.getChildren().add( b );
+        pane.getChildren().add( playButton );
+        pane.getChildren().add( pauseButton );
         pane.getChildren().add( slider );
         pane.getChildren().add( l );
         stage.setScene(scene);
         stage.show();
     }
 
-    private void buttonCliked( MouseEvent e ){
+    private void buttonClikedA( MouseEvent e ){
         Media media = new Media(new File("sample.wav").toURI().toString());
         mplayer = new MediaPlayer( media );
         mplayer.play();
-        //スライダーの最大最小を設定
+
         mplayer.setOnReady(() -> {
+            //スライダーの最大最小を設定
             slider.setMin(mplayer.getStartTime().toSeconds());
             slider.setMax(mplayer.getStopTime().toSeconds());
             //音声の長さを表示
             l.setText( "再生時間 " + mplayer.getStopTime().toSeconds() + " 秒" );
+            //ループ回数を無限に指定
+            mplayer.setCycleCount(MediaPlayer.INDEFINITE);
         });
 
         //再生時間が進んだらスライダーの位置を変更する
         mplayer.currentTimeProperty().addListener((Observable observable) -> slider.setValue( mplayer.getCurrentTime().toSeconds() ));
+    }
+
+    private void buttonClikedB( MouseEvent f ){
+        mplayer.pause();
     }
 
 }
