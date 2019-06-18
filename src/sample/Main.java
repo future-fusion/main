@@ -12,6 +12,8 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Main extends Application {
     MediaPlayer mplayer = null;
@@ -24,6 +26,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        // 現在の日付のみを取得
+        LocalDate d1 = LocalDate.now();
+        System.out.println(d1);
+        // 現在の時刻のみを取得
+        LocalTime t1 = LocalTime.now();
+        System.out.println(t1);
+        int timeHour = t1.getHour();
+        System.out.println(timeHour);
+
         stage.setTitle("JavaFX");
         VBox pane = new VBox();
         Scene scene = new Scene(pane, 320, 240);
