@@ -104,40 +104,6 @@ public class Main extends Application {
         });
         //再生時間が進んだらスライダーの位置を変更する
         mplayer.currentTimeProperty().addListener((Observable observable) -> slider.setValue(mplayer.getCurrentTime().toSeconds()));
-
-
-//        for(;;) {
-//            //System.out.println(t1);
-//            timeHour = t1.getHour();
-//            int timeMinute = t1.getMinute();
-//            //System.out.println(timeHour);
-//            if (timeMinute == 59) {
-//                timeHour++;
-//
-//                //音源のPATHを取得
-//                PATH = "audio/sample" + new String(String.valueOf(timeHour)) + ".wav";
-//                Media mediaB = new Media(new File(PATH).toURI().toString());
-//
-//                mplayer = new MediaPlayer(mediaB);
-//                mplayer.play();
-//                mplayer.setOnReady(() -> {
-//                    //スライダーの最大最小を設定
-//                    slider.setMin(mplayer.getStartTime().toSeconds());
-//                    slider.setMax(mplayer.getStopTime().toSeconds());
-//                    //音源のPATHを設定
-//                    label.setText(PATH);
-//                    //ループ回数を無限に指定
-//                    mplayer.setCycleCount(MediaPlayer.INDEFINITE);
-//                });
-//                //再生時間が進んだらスライダーの位置を変更する
-//                mplayer.currentTimeProperty().addListener((Observable observable) -> slider.setValue(mplayer.getCurrentTime().toSeconds()));
-//            }
-//            try {
-//                sleep(6000);
-//            } catch (InterruptedException ex) {
-//                ex.printStackTrace();
-//            }
-//        }
     }
 
     private void buttonClikedB( MouseEvent f ){
